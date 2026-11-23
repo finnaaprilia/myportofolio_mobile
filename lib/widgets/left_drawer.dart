@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart'; 
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/experience_form.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -40,7 +41,7 @@ class LeftDrawer extends StatelessWidget {
           ),
 
           // === ROUTING ===
-
+          // --- HOMEPAGE ---
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
@@ -54,6 +55,7 @@ class LeftDrawer extends StatelessWidget {
               );
             },
           ),
+          // --- PROJECT ---
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
             title: const Text('Add Project'),
@@ -67,6 +69,24 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const ProjectFormPage(),
+                )
+              );
+            },
+          ),
+          // --- EXPERIENCE ---
+          ListTile(
+            leading: const Icon(Icons.add_circle_outline),
+            title: const Text('Add Experience'),
+            // Navigasi ke halaman tambah proyek
+            onTap: () {
+
+              // routing ke halaman ExperienceFormPage 
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ExperienceFormPage(),
                 )
               );
             },
