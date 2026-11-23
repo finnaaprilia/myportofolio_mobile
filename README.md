@@ -1,24 +1,11 @@
 # myportofolio_mobile
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 
 Nama    : Finna Aprilia
+
 NPM     : 2506538110
+
 Kelas   : PBP - F
 
 
@@ -92,3 +79,114 @@ Hot reload adalah suatu fitur pada Flutter yang memungkinkan kita untuk menginje
 ```AI Disclosure```
 
 Pengerjaan Tugas 7 dikerjakan dengan mengikuti langkah yang tertera di tutorial 08, tanpa penggunaan AI.
+
+
+
+### Tugas 8
+
+
+1. Jelaskan perbedaan antara Navigator.push(), Navigator.pushReplacement(), dan Navigator.pop(). Metode apa yang digunakan untuk membuka formulir dari kartu aksi? Jelaskan juga bagaimana opsi Home di drawer membawa pengguna kembali ke halaman utama.
+
+— Method push() MENAMBAHKAN suatu route ke dalam stack route yang dikelola oleh Navigator. Method ini menyebabkan route yang ditambahkan berada pada paling atas stack, sehingga route yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada pengguna.
+
+— Method pushReplacement() MENGHAPUS route yang sedang ditampilkan kepada pengguna dan MENGGANTI dengan suatu route. Method ini menyebabkan aplikasi untuk berpindah dari route yang sedang ditampilkan kepada pengguna ke suatu route yang diberikan. Pada stack route yang dikelola Navigator, route lama pada atas stack akan digantikan secara langsung oleh route baru yang diberikan tanpa mengubah kondisi elemen stack yang berada di bawahnya.
+
+— Perbedaan push() dan pushReplacement() terletak pada apa yang dilakukan kepada route yang berada pada atas stack. push() akan menambahkan route baru di atas route yang sudah ada pada atas stack, sedangkan pushReplacement() menggantikan route yang sudah ada pada atas stack dengan route baru tersebut. Jika kondisi stack kosong dan kita menekan tombol Back pada gawai, maka sistem akan keluar dari aplikasi tersebut.
+
+— Method pop() MENGHAPUS route yang sedang ditampilkan kepada pengguna (atau dalam kata lain, route yang berada pada paling atas stack) dari stack route yang dikelola oleh Navigator. Method ini menyebabkan aplikasi untuk berpindah dari route yang sedang ditampilkan kepada pengguna ke route yang berada di bawahnya pada stack yang dikelola Navigator. Sederhananya, Navigator.pop() digunakan untuk kembali ke halaman sebelumnya
+
+— Metode yang digunakan untuk membuka formulir dari kartu aksi adalah push(). Contoh Kode sebagai berikut (project_card.dart)
+
+|  // Navigate ke halaman yang sesuai
+|  if (item.name == "Tambah Proyek") {
+|  Navigator.push(context,
+|  MaterialPageRoute(builder: (context) => const ProjectFormPage()));
+|  } 
+
+— Alur opsi Home di drawer membawa pengguna kembali ke halaman utama
+
+|  // --- HOMEPAGE ---
+|  ListTile(
+|  leading: const Icon(Icons.home_outlined),
+|  title: const Text('Home'),
+|  // Navigasi ke halaman utama portofolio
+|  onTap: () {
+|      Navigator.pushReplacement(
+|      context,
+|      MaterialPageRoute(
+|          builder: (context) => MyHomePage(),
+|      ),
+|      );
+|  },
+|  ),
+
+Navigator.pushReplacement() mengganti halaman/rute yang sedang aktif saat ini dengan MyHomePage() baru. Pada menu Home, pushReplacement langsung mengganti halaman aktif sehingga tidak menumpuk MyHomePage secara berulang di navigation stack. Builder (context) => MyHomePage() menginstansiasi ulang MyHomePage dengan transisi halaman standar Material Design. Karena Drawer berada di atas rute halaman aktif pada tumpukan navigasi, penggantian rute dengan pushReplacement sekaligus menutup tampilan drawer sehingga pengguna langsung melihat halaman utama.
+
+
+2. Bagaimana susunan Scaffold, AppBar, dan Drawer membantu menjaga struktur halaman tetap konsisten? Berikan satu contoh penggunaan warna tema portofolio di lebih dari satu halaman.
+
+Scaffold merupakan widget yang menyediakan struktur dasar untuk aplikasi Flutter. Dengan Scaffold, penambahan elemen UI seperti AppBar dan Drawer menjadi lebih mudah. AppBar sendiri digunakan sebagai bilah aplikasi di bagian atas layar. Gunanya untuk menampilkan judul aplikasi dan ikon navigasi. Penggabungan Scaffold dan Appbar menciptakan struktur aplikasi yang lengkap.
+
+Drawer adalah panel menu yang muncul di samping layar aplikasi (menu navigasi samping). Untuk membuka menu tersebut, pengguna harus menggeser layar ke kiri atau ke kanan, sesuai dengan tindakan yang telah ditentukan. Ikon untuk membuka drawer juga secara otomatis disediakan pada AppBar pada posisi tertentu. Tindakan membuka drawer juga sudah diatur secara otomatis oleh komponen Scaffold.
+
+Contoh penggunaan warna tema portofolio di lebih dari satu halaman yakni terdapat di menu.dart, dimana tema aplikasi didefinisikan secara terpusat melalui ThemeData. Warna dari Theme.of(context).colorScheme ini bisa dipakai kembali di lebih dari satu halaman agar identitas warna portofolio tetap selaras.
+
+|  appBar: AppBar(
+|      title: const Text(
+|          'MyPortfolio',
+|          style: TextStyle(
+|          color: Colors.white,
+|          fontWeight: FontWeight.bold,
+|          ),
+|      ),
+|      backgroundColor: Theme.of(context).colorScheme.primary,
+|      iconTheme: const IconThemeData(color: Colors.white)
+|  ),
+
+3. Mengapa tata letak tersebut dipilih untuk formulir? Jelaskan peran widget pengatur jarak dan widget penggulir ketika ruang layar terbatas.
+
+Kombinasi tata letak tersebut memudahkan pengembangan aplikasi yang terstruktur dan user-friendly. Widget pengatur jarak berfungsi untuk mencegah overflow, memaksa elemen-elemen untuk mengecil atau mengisi sisa ruang yang ada, sehingga tidak melebihi batas layar. Saat jumlah konten melebihi tinggi atau lebar fisik layar di halaman formulir, widget penggulir memungkinkan pengguna menggulir layar ke atas atau bawah sehingga kolom input tidak tertutup keyboard dan tidak memicu error (munculnya garis-garis miring berwarna kuning hitam).
+
+
+4. Apa peran GlobalKey<FormState>, validator, dan validate() saat tombol Simpan ditekan? Berikan satu contoh nilai yang ditolak oleh validasi dan jelaskan mengapa memilih jenis input atau papan ketik saja belum cukup.
+
+GlobalKey merepresentasikan suatu key yang bersifat unik, gunanaya untuk mengidentifikasi secara unik tiap elemen dan menyediakan akses ke objek yang berasosiasi dengan elemen tersebut. FormState sendiri adalah sub-class dari State, yang merepresentasikan state yang berasosiasi dengan form. FormState dapat digunakan untuk menyimpan (save), me-reset, dan memvalidasi setiap FormField di dalam Form.
+Validator digunakan untuk memvalidasi isi TextFormField dan mengembalikan pesan error apabila input tidak memenuhi ketentuan. Sementara validate() akan menjalankan validasi terhadap seluruh field yang memiliki validator saat tombol Simpan ditekan.
+
+Contoh nilai yang ditolak oleh validasi yaitu ketika input kosong atau hanya berisi spasi pada field wajib seperti Nama Proyek atau Deskripsi Proyek.
+
+Memilih jenis input (keyboardType) atau papan ketik saja belum cukup, karena itu hanyamemberi saran papan ketik dan tidak membatasi input. Mengatur keyboardType hanya mengarahkan tampilan tata letak soft keyboard yang sesuai. Pengguna tetap bisa memasukkan spasi kosong karena pengaturan ini tidak menolak submisi input yang tidak sesuai, atau pun memberi umpan balik error.
+
+
+```Referensi```
+
+(1) https://medium.com/@basriumar/scaffold-dan-appbar-membuat-struktur-aplikasi-flutter-part-10-43cb93d145a2
+
+(2) https://stackoverflow.com/questions/73462472/what-is-the-meaning-of-the-formstate-syntax-in-the-globalkeyformstate
+
+
+``` AI Disclosure ```
+
+Pengerjaan Tugas Individu 8 ini dilakukan dengan bantuan Google - AI Mode. Pertanyaan yang diajukan adalah mengenai bagaimana menampilkan input form dalam bentuk tanggal, dan pada tugas ini input tersebut diimplementasiakn dalam Experience Form. Dimulai dari tipe data apa yang digunakan untuk mendeklarasikan variabel awalnya, bagaimana mengatur format tampilannya, hingga bagaimana menampilkan data penanggalan ketika pengguna meng-klik tombol Simpan.
+
+Tautan: https://share.google/aimode/U2duZ2Zwb1Xn9JVNF
+
+
+
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+A new Flutter project.
+
+### Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
+- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
