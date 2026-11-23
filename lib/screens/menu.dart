@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
       ),
       drawer: const LeftDrawer(),
       // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,6 +89,7 @@ class MyHomePage extends StatelessWidget {
                     crossAxisCount: 3,
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: items.map((ItemHomepage item) {
                       if (item.name == "Lihat Proyek" || item.name == "Tambah Proyek") {
                         return ProjectCard(item);
