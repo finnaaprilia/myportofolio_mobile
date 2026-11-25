@@ -1,4 +1,4 @@
-import 'package:material_ui/material_ui.dart'; 
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
@@ -93,7 +93,7 @@ class MyHomePage extends StatelessWidget {
                     children: items.map((ItemHomepage item) {
                       if (item.name == "Lihat Proyek" || item.name == "Tambah Proyek") {
                         return ProjectCard(item);
-                      } else if (item.name == "Lihat Proyek" || item.name == "Tambah Pengalaman") {
+                      } else if (item.name == "Lihat Pengalaman" || item.name == "Tambah Pengalaman") {
                         return ExperienceCard(item);
                       } else {
                         return ItemCard(item);
